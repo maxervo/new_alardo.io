@@ -6,8 +6,7 @@ var CURSOR_INACTIVE = "fa fa-square-o";
 var routes = [
   { path: '/' },
   { path: '/about' },
-  { path: '/experiences' },
-  { path: '/*', redirect: '/' }
+  { path: '/experiences' }
 ];
 
 var router = new VueRouter({
@@ -112,13 +111,16 @@ function swipeEnable() {
   var sitemapIndex = 0;
 
   hammertime.on("swipeleft", function(ev) {
-    sitemapIndex++;
-    console.log(sitemapIndex);
+    if (sitemapIndex < 2) {
+      sitemapIndex++;
+    }
     $(".dot-"+sitemapIndex).trigger("click");
   });
 
   hammertime.on("swiperight", function() {
-    sitemapIndex--;
+    if (sitemapIndex > 0) {
+      sitemapIndex--;
+    }
     $(".dot-"+sitemapIndex).trigger("click");
   })
 }
