@@ -108,7 +108,7 @@ a {
     border-bottom-color: transparent; }
 
 strong, b {
-  color: #ffffff;
+  /*color: #ffffff;*/
   font-weight: 600; }
 
 em, i {
@@ -1250,9 +1250,18 @@ button {
 }
 
 .type-pages .profile img {
-  margin: 1rem;
   height: auto;
-  width: 20%;
+  width: 30%;
+}
+
+.type-pages .profile .background {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.type-pages .profile .background .country {
+  flex: 0 0 40%;
 }
 
 .type-pages .sitemap .fa-square-o {

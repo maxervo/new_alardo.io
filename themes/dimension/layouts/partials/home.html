@@ -1,11 +1,13 @@
 <!-- Header -->
   <header id="header" v-if="showHome()">
-    <div class="content">
-      <div class="inner">
-        <h1>{{ .Site.Params.title | safeHTML }}</h1>
-        <p>{{ .Site.Params.description | safeHTML }}</p>
+    <router-link :to="'/about'">
+      <div class="content">
+        <div class="inner">
+          <h1>{{ .Site.Params.title | safeHTML }}</h1>
+          <p>{{ .Site.Params.description | safeHTML }}</p>
+        </div>
       </div>
-    </div>
+  </router-link>
   </header>
 
   <router-view></router-view>
@@ -22,7 +24,7 @@
       </div>-->
       <div class="links">
         {{ range .Site.Params.Social }}
-          <a href="{{.link}}">
+          <a href="{{.link}}" target="_blank">
               <i class="fa fa-{{.icon}}{{.option}}"></i>
           </a>
         {{ end }}
