@@ -1,0 +1,37 @@
+<!-- Header -->
+  <header id="header" v-if="showHome()">
+    <div class="content">
+      <div class="inner">
+        <h1>{{ .Site.Params.title | safeHTML }}</h1>
+        <p>{{ .Site.Params.description | safeHTML }}</p>
+      </div>
+    </div>
+  </header>
+
+  <router-view></router-view>
+
+
+  <footer id="footer" v-if="showHome()">
+
+    <div class="dock">
+      <!--
+      <div class="story">
+        <a href="/story">
+            <i class="fa fa-globe"></i>
+        </a>
+      </div>-->
+      <div class="links">
+        {{ range .Site.Params.Social }}
+          <a href="{{.link}}">
+              <i class="fa fa-{{.icon}}{{.option}}"></i>
+          </a>
+        {{ end }}
+      </div>
+      <!--
+      <div class="slide">
+        <a href="#" class="slide-up"> <i class="fa fa-angle-up"></i> </a>
+        <a href="#" class="slide-down"> <i class="fa fa-angle-down"></i> </a>
+      </div>-->
+    </div>
+
+  </footer>

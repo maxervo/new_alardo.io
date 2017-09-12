@@ -1,0 +1,48 @@
+baseurl = "http://example.org"
+title = "Maxime Alardo"
+theme = "dimension"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+enableRobotsTXT = true
+disableRSS = true
+publishDir = "docs"
+
+[params]
+  title = "Maxime Alardo"
+  description = 'Engineer | Traveler'
+  logo = "fa-diamond"
+  copyright = "Untitled"
+
+[[params.social]]
+  medium = "mail"
+  icon = "envelope"
+  option = "-o"
+  link = "mailto:maxime@alardo.io"
+
+[[params.social]]
+  medium = "linkedin"
+  icon = "linkedin"
+  option = "-square"
+  link = "https://linkedin.com/in/maximealardo"
+
+[[params.social]]
+  medium = "twitter"
+  icon = "twitter"
+  link = "https://twitter.com/maximealardo"
+
+[[params.social]]
+  medium = "medium"
+  icon = "medium"
+  link = "https://medium.com/@maxime.alardo"
+
+[[params.social]]
+  medium = "github"
+  icon = "github"
+  option = "-alt"
+  link = "https://github.com/rstoke"
+
+[languages]
+[languages.en]
+languageName = "English"
+weight = 1
+title = "Maxime Alardo"

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{{ .Title }}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/css/main.css" />
+		<link rel="stylesheet" href="/css/project.css" />
+		<link rel="stylesheet" href="/css/bulma.custom.css" />
+		<link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+
+		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
+	</head>
+	<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+
+  <body id="body">
+
+    <div id="app">
+
+        <div id="wrapper" :class="getType()">
+
+          <nav id="site" class="sitemap" >
+            <div :class="['dots', getBox()]">
+              <router-link :to="'/'"><i :class="[getCursorShape(0), 'dot-0']" @mouseover="hoverCursor(0)" @mouseleave="leaveCursor()"></i></router-link>
+              <router-link :to="'/about'"><i :class="[getCursorShape(1), 'dot-1']" @mouseover="hoverCursor(1)" @mouseleave="leaveCursor()"></i></router-link>
+              <router-link :to="'/experiences'"><i :class="[getCursorShape(2), 'dot-2']" @mouseover="hoverCursor(2)" @mouseleave="leaveCursor()"></i></router-link>
+            </div>
+          </nav>
+
+          {{ partial "home.html" . }}
+
+          {{ partial "about.html" . }}
+
+          {{ partial "experiences.html" . }}
+        </div>
+
+        <!-- BG -->
+        <div id="bg" v-if="showHome()"></div>
+
+    </div>
+
+    <!-- Scripts -->
+      <script src="/js/vue.dev.js"></script> <!-- TODO replace by production one -->
+      <script src="/js/vue-router.js"></script>
+      <script src="/js/skel.min.js"></script>
+			<script src="/js/hammer.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+			<script src="/js/app.js"></script>
+      {{ template "_internal/google_analytics_async.html" . }}
+
+    </body>
+  </html>
