@@ -1299,3 +1299,12 @@ button {
   background-image: -ms-radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
   background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
 }
+
+.type-pages .experiences {
+  text-align: center;
+}
+
+.type-pages .experiences img {
+  height: auto;
+  width: 30%;
+}
