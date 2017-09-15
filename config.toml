@@ -17,7 +17,7 @@ publishDir = "docs"
   medium = "mail"
   icon = "envelope"
   option = "-o"
-  link = "mailto:maxime.alardo@gmail.com"
+  link = "mailto:maxime@alardo.io"
 
 [[params.social]]
   medium = "linkedin"
