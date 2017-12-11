@@ -1308,3 +1308,7 @@ button {
   height: auto;
   width: 30%;
 }
+
+.experiences .company {
+  margin-bottom: 0;
+}
