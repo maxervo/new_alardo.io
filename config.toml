@@ -28,18 +28,18 @@ publishDir = "docs"
 [[params.social]]
   medium = "twitter"
   icon = "twitter"
-  link = "https://twitter.com/maximealardo"
+  link = "https://twitter.com/ntoreky"
 
 [[params.social]]
   medium = "medium"
   icon = "medium"
-  link = "https://medium.com/@maxime.alardo"
+  link = "https://medium.com/@ntoreky"
 
 [[params.social]]
   medium = "github"
   icon = "github"
   option = "-alt"
-  link = "https://github.com/rstoke"
+  link = "https://github.com/ntoreky"
 
 [languages]
 [languages.en]
