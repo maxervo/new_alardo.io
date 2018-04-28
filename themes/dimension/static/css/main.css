@@ -1254,6 +1254,10 @@ button {
   width: 30%;
 }
 
+.type-pages .profile a {
+  color: rgb(61,153,112);
+}
+
 .type-pages .profile .background {
   display: flex;
   flex-flow: row wrap;
