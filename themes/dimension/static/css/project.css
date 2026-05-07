@@ -1,0 +1,150 @@
+.type-pages .profile .intro {
+  margin: 0 auto 3.25rem;
+  max-width: 50rem;
+  padding: 0 1.5rem;
+}
+
+.type-pages .profile .intro p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 44rem;
+}
+
+.type-pages .profile .intro-lede {
+  margin-bottom: 1.5rem;
+}
+
+.type-pages .profile .focus-section {
+  margin: 2.7rem auto 2.5rem;
+  max-width: 38rem;
+  padding-top: 1.6rem;
+  position: relative;
+}
+
+.type-pages .profile .focus-section::before {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(61, 153, 112, 0.28),
+    transparent
+  );
+  content: "";
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: min(20rem, 68%);
+}
+
+.type-pages .profile .focus-title {
+  color: rgb(61, 153, 112);
+  font-weight: 600;
+  letter-spacing: 0.12rem;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.type-pages .profile .focus-copy {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.type-pages .profile .focus-copy span {
+  display: block;
+  margin: 0.22rem 0;
+}
+
+.type-pages .profile .experiences-snippet {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 2.4rem auto 2rem;
+  max-width: 40rem;
+  padding: 1.45rem 0;
+  position: relative;
+}
+
+.type-pages .profile .experiences-snippet::before {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(61, 153, 112, 0.28),
+    transparent
+  );
+  content: "";
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: min(20rem, 68%);
+}
+
+.type-pages .profile .experiences-snippet li {
+  color: #333;
+  padding: 0.28rem 0;
+  position: relative;
+}
+
+.type-pages .profile .experiences-snippet li:last-child {
+  margin-top: 0.28rem;
+}
+
+.type-pages .profile .experiences-snippet::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(61, 153, 112, 0.28),
+    transparent
+  );
+  content: "";
+  height: 1px;
+  bottom: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: min(20rem, 68%);
+}
+
+.type-pages .experiences .logo-pair {
+  align-items: center;
+  display: inline-flex;
+  gap: 1.4rem;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.type-pages .experiences .logo-pair img {
+  height: 7rem;
+  object-fit: contain;
+  width: auto;
+}
+
+.type-pages .experiences .logo-pair .meraki-logo {
+  aspect-ratio: 1;
+}
+
+.type-pages .experiences .logo-pair .cisco-logo {
+  max-width: 13rem;
+}
+
+@media screen and (max-width: 736px) {
+  .type-pages .profile .intro {
+    padding: 0 1.25rem;
+  }
+
+  .type-pages .profile .experiences-snippet {
+    padding: 0;
+  }
+
+  .type-pages .experiences .logo-pair {
+    gap: 0.9rem;
+  }
+
+  .type-pages .experiences .logo-pair img {
+    height: 5rem;
+  }
+
+}

@@ -1,7 +1,7 @@
-baseurl = "http://example.org"
+baseURL = "https://alardo.io/"
 title = "Maxime Alardo"
 theme = "dimension"
-languageCode = "en-us"
+locale = "en-us"
 defaultContentLanguage = "en"
 enableRobotsTXT = true
 disableRSS = true
@@ -9,7 +9,7 @@ publishDir = "docs"
 
 [params]
   title = "Maxime Alardo"
-  description = 'Engineer | Traveler'
+  description = 'Windsurfer | R&D'
   logo = "fa-diamond"
   copyright = "Untitled"
 
@@ -43,6 +43,6 @@ publishDir = "docs"
 
 [languages]
 [languages.en]
-languageName = "English"
+label = "English"
 weight = 1
 title = "Maxime Alardo"

@@ -1,107 +1,126 @@
-<div class="picture" v-if="showAbout()">
-</div>
-
+<div class="picture" v-if="showAbout()"></div>
 
 <div class="profile" v-if="showAbout()">
+    <h1>Maxime Alardo</h1>
 
-  <h1>Maxime Alardo</h1>
+    <div class="intro">
+        <p class="intro-lede">
+            Hi! I'm a windsurfer and engineer, specialized in core backend
+            &times; applied AI for emerging/frontier fields.
+        </p>
 
-  <div class="intro">
+        <p>
+            I've been passionate about personal software, knowledge systems and
+            self-learning since growing up in Diego Suarez, Madagascar. Based in
+            San Francisco Bay Area, feel free to reach out 👋
+        </p>
 
-    <p>
-      Hi! I'm an windsurfer, traveler and engineer working on emerging/frontier fields such as GenAI (multi-agent orchestration), knowledge systems and core backend applied to intelligent spaces (Cloud for IoT, fleets of connected devices, edge computing).
-    </p>
+        <div class="focus-section">
+            <p class="focus-title">Working on</p>
+            <p class="focus-copy">
+                <span>Personal software, paradigm inversion</span>
+                <span>Agents &times; knowledge bases &times; R&amp;D</span>
+                <span>Agentic search, harness, orchestration</span>
+                <span>Sandboxing, untrusted code execution</span>
+                <span>Durable workflows</span>
+                <span>
+                    Intelligent spaces <br />
+                    (Cloud for IoT and fleets of connected devices, edge
+                    computing, physical AI)
+                </span>
+            </p>
+        </div>
 
-    <p>
-      I've been passionate about open-ended problems, science and research, as well as knowledge systems, personal computing and education (self-learning / community based learning) since growing up in Diego Suarez, Madagascar.
-      Based in San Francisco Bay Area, feel free to reach out :)
-    </p>
+        <ul class="experiences-snippet">
+            <li>Applied AI @ NVIDIA</li>
+            <li>Core + AI @ Cisco Meraki and Cisco CTO Office</li>
+            <li>
+                Supervised by
+                <a href="https://en.wikipedia.org/wiki/Landon_Curt_Noll"
+                    >Landon Noll</a
+                >
+            </li>
+            <li>
+                Computer Science @ UC San Diego <br />
+                (Partnership Program UCs - France)
+            </li>
+        </ul>
+    </div>
 
-    <p>
-      Senior Software Engineer @ Cisco Meraki (Core Backend & Data Engineering) <br>
-      Participated in the special <a href="https://myciip.com/">CIIP</a> batch 2018-2019. Supervised by <a href="https://en.wikipedia.org/wiki/Landon_Curt_Noll">Landon Noll</a> in collaboration with <a href="http://research.cisco.com/">Cisco Research</a>. <br>
-      Studied Computer Science @ UC San Diego (Partnership Program between UCs &amp; France). <br>
-    </p>
+    <h1>Background</h1>
 
-  </div>
-
-  <h1>Background </h1>
-
-  <div class="background">
-    <div class="country usa">
-      <div class="show">
-        <img src="/images/usa.png" alt="California, USA">
-        <p><b>Currently living in SF Bay Area, USA</b></p>
-      </div>
-      <!--
+    <div class="background">
+        <div class="country usa">
+            <div class="show">
+                <img src="/images/usa.png" alt="California, USA" />
+                <p><b>Currently living in SF Bay Area, USA</b></p>
+            </div>
+            <!--
       <div class="more box" hidden>
         <p>
           Studied Computer Science in UC San Diego, USA.
         </p>
       </div>-->
-    </div>
-    <div class="country france">
-      <div class="show">
-        <img src="/images/france.png" alt="France">
-        <p><b>Lived in France</b></p>
-      </div>
-      <!--
+        </div>
+        <div class="country france">
+            <div class="show">
+                <img src="/images/france.png" alt="France" />
+                <p><b>Lived in France</b></p>
+            </div>
+            <!--
       <div class="more box" hidden>
         Studied in the Grandes Ecoles &amp; CPGE System in France doing an MPSI/MP*.
       </div>-->
-    </div>
-    <div class="country madagascar">
-      <div class="show">
-        <img src="/images/madagascar.png" alt="Madagascar">
-        <p><b>Grew up in Madagascar</b></p>
-      </div>
-      <!--
+        </div>
+        <div class="country madagascar">
+            <div class="show">
+                <img src="/images/madagascar.png" alt="Madagascar" />
+                <p><b>Grew up in Madagascar</b></p>
+            </div>
+            <!--
       <div class="more box" hidden>
         <p>
           Grew up in Diego Suarez, Madagascar, where I became passionate about learning (reading autonomously CS, Math, Physics and any fields in general!), traveling and riding waves. I studied in the Lycee Francais a l'Etranger AEFE.
         </p>
       </div>-->
-    </div>
-    <div class="country texas">
-      <div class="show">
-        <img src="/images/usa.png" alt="Houston, USA">
-        <p><b>Lived in USA</b></p>
-      </div>
-      <!--
+        </div>
+        <div class="country texas">
+            <div class="show">
+                <img src="/images/usa.png" alt="Houston, USA" />
+                <p><b>Lived in USA</b></p>
+            </div>
+            <!--
       <div class="more box" hidden>
         <p>
           Currently studying Computer Science in UC San Diego, USA.
         </p>
       </div>-->
-    </div>
-    <div class="country mexico">
-      <div class="show">
-        <img src="/images/mexico.png" alt="Mexico">
-        <p><b>Lived in Mexico</b></p>
-      </div>
-      <!--
+        </div>
+        <div class="country mexico">
+            <div class="show">
+                <img src="/images/mexico.png" alt="Mexico" />
+                <p><b>Lived in Mexico</b></p>
+            </div>
+            <!--
       <div class="more box" hidden>
         <p>
           Before going to Madagascar, I traveled with my parents and lived in Mexico City and Caracas, Venezuela.
         </p>
       </div>-->
-    </div>
-    <div class="country venezuela">
-      <div class="show">
-        <img src="/images/venezuela.png" alt="Venezuela">
-        <p><b>Lived in Venezuela</b></p>
-      </div>
-      <!--
+        </div>
+        <div class="country venezuela">
+            <div class="show">
+                <img src="/images/venezuela.png" alt="Venezuela" />
+                <p><b>Lived in Venezuela</b></p>
+            </div>
+            <!--
       <div class="more box">
         <p>
           Before going to Madagascar, I traveled with my parents and lived in Mexico City and Caracas, Venezuela.
         </p>
       </div>-->
-    </div>
+        </div>
 
-    <div class="">
+        <div class=""></div>
     </div>
-
-    </div>
-
 </div>
