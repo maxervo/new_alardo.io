@@ -111,23 +111,48 @@
 .type-pages .experiences .logo-pair {
   align-items: center;
   display: inline-flex;
-  gap: 1.4rem;
+  gap: 1rem;
   justify-content: center;
   margin: 0 auto 1rem;
 }
 
 .type-pages .experiences .logo-pair img {
-  height: 7rem;
+  border-radius: 0.45rem;
+  height: 7.2rem;
   object-fit: contain;
-  width: auto;
+  width: 7.2rem;
 }
 
-.type-pages .experiences .logo-pair .meraki-logo {
-  aspect-ratio: 1;
+.type-pages .experiences .job > img,
+.type-pages .experiences .involve > img,
+.type-pages .experiences .project > img {
+  height: 7.2rem;
+  object-fit: contain;
+  width: 7.2rem;
 }
 
-.type-pages .experiences .logo-pair .cisco-logo {
-  max-width: 13rem;
+.type-pages .experiences .job > img.nvidia-logo {
+  height: auto;
+  width: 13.5rem;
+}
+
+#wrapper.type-home {
+  min-height: 100vh;
+}
+
+.type-home #footer {
+  margin-bottom: 0;
+  padding-bottom: 1.25rem;
+}
+
+@supports (min-height: 100dvh) {
+  #wrapper.type-home {
+    min-height: 100dvh;
+  }
+
+  #bg {
+    height: 100dvh;
+  }
 }
 
 @media screen and (max-width: 736px) {
@@ -140,11 +165,20 @@
   }
 
   .type-pages .experiences .logo-pair {
-    gap: 0.9rem;
+    gap: 0.65rem;
   }
 
   .type-pages .experiences .logo-pair img {
-    height: 5rem;
+    height: 4.7rem;
+    width: 4.7rem;
+  }
+
+  .type-home #footer {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .type-home .dock {
+    font-size: 2.15rem;
   }
 
 }
