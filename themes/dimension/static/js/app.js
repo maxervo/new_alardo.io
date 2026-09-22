@@ -100,6 +100,7 @@ function swipeEnable() {
   var startY = 0;
   var lastX = 0;
   var lastY = 0;
+  var startScrollY = 0;
 
   if (window.PointerEvent) {
     surface.addEventListener("pointerdown", function(event) {
@@ -124,7 +125,7 @@ function swipeEnable() {
 
     surface.addEventListener("pointercancel", function(event) {
       if (event.pointerId === activeContact) {
-        resetSwipe();
+        finishSwipe(lastX, lastY);
       }
     }, { passive: true });
   } else {
@@ -154,7 +155,11 @@ function swipeEnable() {
       }
     }, { passive: true });
 
-    surface.addEventListener("touchcancel", resetSwipe, { passive: true });
+    surface.addEventListener("touchcancel", function() {
+      if (activeContact !== null) {
+        finishSwipe(lastX, lastY);
+      }
+    }, { passive: true });
   }
 
   function beginSwipe(pointerId, clientX, clientY) {
@@ -171,6 +176,7 @@ function swipeEnable() {
     startY = clientY;
     lastX = clientX;
     lastY = clientY;
+    startScrollY = window.scrollY;
   }
 
   function updateSwipe(clientX, clientY) {
@@ -196,10 +202,12 @@ function swipeEnable() {
     var direction = gestureIntent === "vertical"
       ? 0
       : getSwipeDirection(lastX - startX, lastY - startY);
+    var originalScrollY = startScrollY;
 
     resetSwipe();
 
     if (direction !== 0) {
+      window.scrollTo(0, originalScrollY);
       navigateBySwipe(direction);
     }
   }
@@ -217,6 +225,7 @@ function swipeEnable() {
   function resetSwipe() {
     activeContact = null;
     gestureIntent = "idle";
+    startScrollY = 0;
   }
 }
 
