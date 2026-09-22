@@ -1,5 +1,3 @@
-var hammertime = new Hammer(document.body, {});
-
 var CURSOR_ACTIVE = "fa fa-square";
 var CURSOR_INACTIVE = "fa fa-square-o";
 
@@ -101,12 +99,20 @@ function fixScrollOverflow() {
     wrapper.style.transform = "translateY(-5%)";  //fix
   } else {
     body.style.overflow = "auto";
-    wrapper.style.transform = "translateY(0%)";
+    wrapper.style.transform = "none";
   }
 
 };
 
 function swipeEnable() {
+  var navigation = document.getElementById("site");
+
+  if (!navigation) {
+    return;
+  }
+
+  var hammertime = new Hammer(navigation, {});
+  hammertime.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
   var sitemapIndex = 0;
 
   hammertime.on("swipeleft", function(ev) {
