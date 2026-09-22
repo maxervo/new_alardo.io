@@ -94,32 +94,88 @@ function swipeEnable() {
     return;
   }
 
-  var activeTouch = null;
+  var activeContact = null;
   var gestureIntent = "idle";
   var startX = 0;
   var startY = 0;
   var lastX = 0;
   var lastY = 0;
 
-  surface.addEventListener("touchstart", function(event) {
-    if (event.touches.length !== 1) {
+  if (window.PointerEvent) {
+    surface.addEventListener("pointerdown", function(event) {
+      if (event.pointerType !== "touch" || !event.isPrimary) {
+        return;
+      }
+
+      beginSwipe(event.pointerId, event.clientX, event.clientY);
+    }, { passive: true });
+
+    surface.addEventListener("pointermove", function(event) {
+      if (event.pointerId === activeContact) {
+        updateSwipe(event.clientX, event.clientY);
+      }
+    }, { passive: true });
+
+    surface.addEventListener("pointerup", function(event) {
+      if (event.pointerId === activeContact) {
+        finishSwipe(event.clientX, event.clientY);
+      }
+    }, { passive: true });
+
+    surface.addEventListener("pointercancel", function(event) {
+      if (event.pointerId === activeContact) {
+        resetSwipe();
+      }
+    }, { passive: true });
+  } else {
+    surface.addEventListener("touchstart", function(event) {
+      if (event.touches.length !== 1) {
+        resetSwipe();
+        return;
+      }
+
+      var touch = event.touches[0];
+      beginSwipe(touch.identifier, touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    surface.addEventListener("touchmove", function(event) {
+      var touch = findTouch(event.touches, activeContact);
+
+      if (touch) {
+        updateSwipe(touch.clientX, touch.clientY);
+      }
+    }, { passive: true });
+
+    surface.addEventListener("touchend", function(event) {
+      var touch = findTouch(event.changedTouches, activeContact);
+
+      if (touch) {
+        finishSwipe(touch.clientX, touch.clientY);
+      }
+    }, { passive: true });
+
+    surface.addEventListener("touchcancel", resetSwipe, { passive: true });
+  }
+
+  function beginSwipe(pointerId, clientX, clientY) {
+    var edgeGutter = 32;
+
+    if (clientX <= edgeGutter || clientX >= window.innerWidth - edgeGutter) {
       resetSwipe();
       return;
     }
 
-    var touch = event.touches[0];
-    beginSwipe(touch.identifier, touch.clientX, touch.clientY);
-  }, { passive: true });
+    activeContact = pointerId;
+    gestureIntent = "pending";
+    startX = clientX;
+    startY = clientY;
+    lastX = clientX;
+    lastY = clientY;
+  }
 
-  surface.addEventListener("touchmove", function(event) {
-    var touch = findTouch(event.touches, activeTouch);
-
-    if (!touch) {
-      return;
-    }
-
-    lastX = touch.clientX;
-    lastY = touch.clientY;
+  function updateSwipe(clientX, clientY) {
+    lastX = clientX;
+    lastY = clientY;
 
     var horizontalDistance = Math.abs(lastX - startX);
     var verticalDistance = Math.abs(lastY - startY);
@@ -131,36 +187,6 @@ function swipeEnable() {
         gestureIntent = "vertical";
       }
     }
-
-    if (gestureIntent === "horizontal" && event.cancelable) {
-      event.preventDefault();
-    }
-  }, { passive: false });
-
-  surface.addEventListener("touchend", function(event) {
-    var touch = findTouch(event.changedTouches, activeTouch);
-
-    if (touch) {
-      finishSwipe(touch.clientX, touch.clientY);
-    }
-  }, { passive: true });
-
-  surface.addEventListener("touchcancel", resetSwipe, { passive: true });
-
-  function beginSwipe(pointerId, clientX, clientY) {
-    var edgeGutter = 32;
-
-    if (clientX <= edgeGutter || clientX >= window.innerWidth - edgeGutter) {
-      resetSwipe();
-      return;
-    }
-
-    activeTouch = pointerId;
-    gestureIntent = "pending";
-    startX = clientX;
-    startY = clientY;
-    lastX = clientX;
-    lastY = clientY;
   }
 
   function finishSwipe(clientX, clientY) {
@@ -189,7 +215,7 @@ function swipeEnable() {
   }
 
   function resetSwipe() {
-    activeTouch = null;
+    activeContact = null;
     gestureIntent = "idle";
   }
 }
