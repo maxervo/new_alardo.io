@@ -18,7 +18,6 @@ var app = new Vue({
   el: '#app',
   router: router,
   data: {
-    location: window.location,
     cursorHovered: null
   },
   delimiters: ['${', '}'],
@@ -30,7 +29,7 @@ var app = new Vue({
   methods: {
     getCursorShape: function(dot) {
 
-      var url = this.location.pathname;
+      var url = this.$route.path;
 
       console.log(url);
 
@@ -59,19 +58,19 @@ var app = new Vue({
     },
 
     showHome: function() {
-      return this.location.pathname === "/";
+      return this.$route.path === "/";
     },
 
     showAbout: function() {
-      return this.location.pathname === "/about";
+      return this.$route.path === "/about";
     },
 
     showExperiences: function() {
-      return this.location.pathname === "/experiences";
+      return this.$route.path === "/experiences";
     },
 
     getType: function() {
-      if(this.location.pathname === "/") {
+      if(this.$route.path === "/") {
         return "type-home";
       } else {
         return "type-pages";
@@ -93,7 +92,7 @@ var app = new Vue({
 function fixScrollOverflow() {
   var body = document.body;
   var wrapper = document.getElementById("wrapper");
-  var url = this.location.pathname;
+  var url = window.location.pathname;
 
   var scrollVisible = $(document).height() > $(window).height();
 
