@@ -1,6 +1,8 @@
 html,
 body {
-  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: auto;
 }
 
 .type-pages .profile .intro {
@@ -13,7 +15,11 @@ body {
   flex-flow: column nowrap;
   justify-content: flex-start;
   overflow-x: hidden;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
+}
+
+#wrapper.type-home {
+  touch-action: pan-y pinch-zoom;
 }
 
 #wrapper.type-pages.page-edge-fade {

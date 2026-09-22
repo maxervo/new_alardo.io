@@ -9,7 +9,10 @@ var routes = [
 
 var router = new VueRouter({
   mode: 'history',
-  routes // short for `routes: routes`
+  routes, // short for `routes: routes`
+  scrollBehavior: function(to, from, savedPosition) {
+    return savedPosition || { x: 0, y: 0 };
+  }
 });
 
 var app = new Vue({
@@ -105,27 +108,120 @@ function fixScrollOverflow() {
 };
 
 function swipeEnable() {
-  var navigation = document.getElementById("site");
+  var surface = document.getElementById("wrapper");
 
-  if (!navigation) {
+  if (!surface) {
     return;
   }
 
-  var hammertime = new Hammer(navigation, {});
-  hammertime.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
-  var sitemapIndex = 0;
+  var activePointer = null;
+  var startX = 0;
+  var startY = 0;
+  var startTime = 0;
 
-  hammertime.on("swipeleft", function(ev) {
-    if (sitemapIndex < 2) {
-      sitemapIndex++;
-    }
-    $(".dot-"+sitemapIndex).trigger("click");
-  });
+  if (window.PointerEvent) {
+    surface.addEventListener("pointerdown", function(event) {
+      if (event.pointerType !== "touch" || !event.isPrimary) {
+        return;
+      }
 
-  hammertime.on("swiperight", function() {
-    if (sitemapIndex > 0) {
-      sitemapIndex--;
+      beginSwipe(event.pointerId, event.clientX, event.clientY);
+    }, { passive: true });
+
+    surface.addEventListener("pointerup", function(event) {
+      if (event.pointerId === activePointer) {
+        finishSwipe(event.clientX, event.clientY);
+      }
+    }, { passive: true });
+
+    surface.addEventListener("pointercancel", function(event) {
+      if (event.pointerId === activePointer) {
+        activePointer = null;
+      }
+    }, { passive: true });
+  } else {
+    surface.addEventListener("touchstart", function(event) {
+      if (event.touches.length !== 1) {
+        activePointer = null;
+        return;
+      }
+
+      var touch = event.touches[0];
+      beginSwipe(touch.identifier, touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    surface.addEventListener("touchend", function(event) {
+      for (var index = 0; index < event.changedTouches.length; index++) {
+        var touch = event.changedTouches[index];
+
+        if (touch.identifier === activePointer) {
+          finishSwipe(touch.clientX, touch.clientY);
+          break;
+        }
+      }
+    }, { passive: true });
+
+    surface.addEventListener("touchcancel", function() {
+      activePointer = null;
+    }, { passive: true });
+  }
+
+  function beginSwipe(pointerId, clientX, clientY) {
+    var edgeGutter = 24;
+
+    if (clientX <= edgeGutter || clientX >= window.innerWidth - edgeGutter) {
+      activePointer = null;
+      return;
     }
-    $(".dot-"+sitemapIndex).trigger("click");
-  })
+
+    activePointer = pointerId;
+    startX = clientX;
+    startY = clientY;
+    startTime = performance.now();
+  }
+
+  function finishSwipe(clientX, clientY) {
+    var direction = getSwipeDirection(
+      clientX - startX,
+      clientY - startY,
+      performance.now() - startTime
+    );
+
+    activePointer = null;
+
+    if (direction !== 0) {
+      navigateBySwipe(direction);
+    }
+  }
+}
+
+function getSwipeDirection(deltaX, deltaY, elapsed) {
+  var horizontalDistance = Math.abs(deltaX);
+  var verticalDistance = Math.abs(deltaY);
+  var horizontalVelocity = horizontalDistance / Math.max(elapsed, 1);
+
+  if (
+    horizontalDistance < 52 ||
+    horizontalDistance < verticalDistance * 1.35 ||
+    horizontalVelocity < 0.16
+  ) {
+    return 0;
+  }
+
+  return deltaX < 0 ? 1 : -1;
+}
+
+function navigateBySwipe(direction) {
+  var paths = ["/", "/about", "/experiences"];
+  var currentIndex = paths.indexOf(router.currentRoute.path);
+
+  if (currentIndex === -1) {
+    return;
+  }
+
+  var nextIndex = Math.max(0, Math.min(paths.length - 1, currentIndex + direction));
+
+  if (nextIndex !== currentIndex) {
+    router.push(paths[nextIndex]);
+  }
 }
