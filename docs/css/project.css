@@ -1,6 +1,5 @@
 html,
 body {
-  -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: none;
   overscroll-behavior-y: auto;
 }

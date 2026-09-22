@@ -23,10 +23,8 @@ var app = new Vue({
   },
   delimiters: ['${', '}'],
   mounted: function() {
-    fixScrollOverflow();
     swipeEnable();
   },
-  updated: fixScrollOverflow,
   methods: {
     getCursorShape: function(dot) {
 
@@ -88,24 +86,6 @@ var app = new Vue({
 
   }
 });
-
-//temp TODO way to keep fullscreen hero image
-function fixScrollOverflow() {
-  var body = document.body;
-  var wrapper = document.getElementById("wrapper");
-  var url = window.location.pathname;
-
-  var scrollVisible = $(document).height() > $(window).height();
-
-  if (url === "/" && scrollVisible) {
-    body.style.overflow = "hidden";
-    wrapper.style.transform = "translateY(-5%)";  //fix
-  } else {
-    body.style.overflow = "auto";
-    wrapper.style.transform = "none";
-  }
-
-};
 
 function swipeEnable() {
   var surface = document.getElementById("wrapper");
