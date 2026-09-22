@@ -99,11 +99,12 @@ body {
 
 .type-pages .profile .focus-title {
   color: rgb(61, 153, 112);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18rem;
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.3;
   margin-bottom: 0.65rem;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .type-pages .profile .focus-heading {
@@ -268,6 +269,11 @@ body {
 }
 
 @media screen and (max-width: 736px) {
+  .type-pages .profile .focus-title {
+    font-size: 1.75rem;
+    line-height: 1.4;
+  }
+
   #wrapper.type-pages.page-edge-fade::before {
     border-radius: 1rem;
     bottom: -1.5rem;
