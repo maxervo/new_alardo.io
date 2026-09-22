@@ -97,7 +97,6 @@ function swipeEnable() {
   var activePointer = null;
   var startX = 0;
   var startY = 0;
-  var startTime = 0;
 
   if (window.PointerEvent) {
     surface.addEventListener("pointerdown", function(event) {
@@ -147,7 +146,7 @@ function swipeEnable() {
   }
 
   function beginSwipe(pointerId, clientX, clientY) {
-    var edgeGutter = 24;
+    var edgeGutter = 32;
 
     if (clientX <= edgeGutter || clientX >= window.innerWidth - edgeGutter) {
       activePointer = null;
@@ -157,14 +156,12 @@ function swipeEnable() {
     activePointer = pointerId;
     startX = clientX;
     startY = clientY;
-    startTime = performance.now();
   }
 
   function finishSwipe(clientX, clientY) {
     var direction = getSwipeDirection(
       clientX - startX,
-      clientY - startY,
-      performance.now() - startTime
+      clientY - startY
     );
 
     activePointer = null;
@@ -175,15 +172,13 @@ function swipeEnable() {
   }
 }
 
-function getSwipeDirection(deltaX, deltaY, elapsed) {
+function getSwipeDirection(deltaX, deltaY) {
   var horizontalDistance = Math.abs(deltaX);
   var verticalDistance = Math.abs(deltaY);
-  var horizontalVelocity = horizontalDistance / Math.max(elapsed, 1);
 
   if (
-    horizontalDistance < 52 ||
-    horizontalDistance < verticalDistance * 1.35 ||
-    horizontalVelocity < 0.16
+    horizontalDistance < 36 ||
+    horizontalDistance < verticalDistance * 1.1
   ) {
     return 0;
   }
