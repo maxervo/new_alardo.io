@@ -94,81 +94,103 @@ function swipeEnable() {
     return;
   }
 
-  var activePointer = null;
+  var activeTouch = null;
+  var gestureIntent = "idle";
   var startX = 0;
   var startY = 0;
+  var lastX = 0;
+  var lastY = 0;
 
-  if (window.PointerEvent) {
-    surface.addEventListener("pointerdown", function(event) {
-      if (event.pointerType !== "touch" || !event.isPrimary) {
-        return;
+  surface.addEventListener("touchstart", function(event) {
+    if (event.touches.length !== 1) {
+      resetSwipe();
+      return;
+    }
+
+    var touch = event.touches[0];
+    beginSwipe(touch.identifier, touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  surface.addEventListener("touchmove", function(event) {
+    var touch = findTouch(event.touches, activeTouch);
+
+    if (!touch) {
+      return;
+    }
+
+    lastX = touch.clientX;
+    lastY = touch.clientY;
+
+    var horizontalDistance = Math.abs(lastX - startX);
+    var verticalDistance = Math.abs(lastY - startY);
+
+    if (gestureIntent === "pending" && Math.max(horizontalDistance, verticalDistance) >= 10) {
+      if (horizontalDistance >= verticalDistance * 0.8) {
+        gestureIntent = "horizontal";
+      } else if (verticalDistance > horizontalDistance * 1.2) {
+        gestureIntent = "vertical";
       }
+    }
 
-      beginSwipe(event.pointerId, event.clientX, event.clientY);
-    }, { passive: true });
+    if (gestureIntent === "horizontal" && event.cancelable) {
+      event.preventDefault();
+    }
+  }, { passive: false });
 
-    surface.addEventListener("pointerup", function(event) {
-      if (event.pointerId === activePointer) {
-        finishSwipe(event.clientX, event.clientY);
-      }
-    }, { passive: true });
+  surface.addEventListener("touchend", function(event) {
+    var touch = findTouch(event.changedTouches, activeTouch);
 
-    surface.addEventListener("pointercancel", function(event) {
-      if (event.pointerId === activePointer) {
-        activePointer = null;
-      }
-    }, { passive: true });
-  } else {
-    surface.addEventListener("touchstart", function(event) {
-      if (event.touches.length !== 1) {
-        activePointer = null;
-        return;
-      }
+    if (touch) {
+      finishSwipe(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
 
-      var touch = event.touches[0];
-      beginSwipe(touch.identifier, touch.clientX, touch.clientY);
-    }, { passive: true });
-
-    surface.addEventListener("touchend", function(event) {
-      for (var index = 0; index < event.changedTouches.length; index++) {
-        var touch = event.changedTouches[index];
-
-        if (touch.identifier === activePointer) {
-          finishSwipe(touch.clientX, touch.clientY);
-          break;
-        }
-      }
-    }, { passive: true });
-
-    surface.addEventListener("touchcancel", function() {
-      activePointer = null;
-    }, { passive: true });
-  }
+  surface.addEventListener("touchcancel", resetSwipe, { passive: true });
 
   function beginSwipe(pointerId, clientX, clientY) {
     var edgeGutter = 32;
 
     if (clientX <= edgeGutter || clientX >= window.innerWidth - edgeGutter) {
-      activePointer = null;
+      resetSwipe();
       return;
     }
 
-    activePointer = pointerId;
+    activeTouch = pointerId;
+    gestureIntent = "pending";
     startX = clientX;
     startY = clientY;
+    lastX = clientX;
+    lastY = clientY;
   }
 
   function finishSwipe(clientX, clientY) {
-    var direction = getSwipeDirection(
-      clientX - startX,
-      clientY - startY
-    );
+    lastX = clientX;
+    lastY = clientY;
 
-    activePointer = null;
+    var direction = gestureIntent === "vertical"
+      ? 0
+      : getSwipeDirection(lastX - startX, lastY - startY);
+
+    resetSwipe();
 
     if (direction !== 0) {
       navigateBySwipe(direction);
     }
+  }
+
+  function findTouch(touchList, identifier) {
+    for (var index = 0; index < touchList.length; index++) {
+      if (touchList[index].identifier === identifier) {
+        return touchList[index];
+      }
+    }
+
+    return null;
+  }
+
+  function resetSwipe() {
+    activeTouch = null;
+    gestureIntent = "idle";
   }
 }
 
@@ -177,8 +199,8 @@ function getSwipeDirection(deltaX, deltaY) {
   var verticalDistance = Math.abs(deltaY);
 
   if (
-    horizontalDistance < 36 ||
-    horizontalDistance < verticalDistance * 1.1
+    horizontalDistance < 32 ||
+    horizontalDistance < verticalDistance * 0.8
   ) {
     return 0;
   }
