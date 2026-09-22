@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/css/main.css" />
-		<link rel="stylesheet" href="/css/project.css?v=3" />
+		<link rel="stylesheet" href="/css/project.css?v=4" />
 		<link rel="stylesheet" href="/css/bulma.custom.css" />
 		<link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
 		<link rel=icon href=/images/favicon.png>
@@ -26,7 +26,7 @@
 
     <div id="app">
 
-        <div id="wrapper" :class="getType()">
+        <div id="wrapper" class="{{ if .Site.Params.pageEdgeFade }}page-edge-fade{{ end }}" :class="getType()">
 
           <nav id="site" class="sitemap" >
             <div :class="['dots', getBox()]">
@@ -44,7 +44,7 @@
         </div>
 
         <!-- BG -->
-        <div id="bg" v-if="showHome()"></div>
+        <div id="bg"{{ if not .Site.Params.pageEdgeFade }} v-if="showHome()"{{ end }}></div>
 
     </div>
 
