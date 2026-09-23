@@ -13,7 +13,7 @@ body {
 #wrapper.type-pages {
   flex-flow: column nowrap;
   justify-content: flex-start;
-  overflow-x: hidden;
+  overflow-x: clip;
   touch-action: pan-y pinch-zoom;
 }
 

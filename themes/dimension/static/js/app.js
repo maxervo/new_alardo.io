@@ -125,7 +125,7 @@ function swipeEnable() {
 
     surface.addEventListener("pointercancel", function(event) {
       if (event.pointerId === activeContact) {
-        finishSwipe(lastX, lastY);
+        resetSwipe();
       }
     }, { passive: true });
   } else {
@@ -155,11 +155,7 @@ function swipeEnable() {
       }
     }, { passive: true });
 
-    surface.addEventListener("touchcancel", function() {
-      if (activeContact !== null) {
-        finishSwipe(lastX, lastY);
-      }
-    }, { passive: true });
+    surface.addEventListener("touchcancel", resetSwipe, { passive: true });
   }
 
   function beginSwipe(pointerId, clientX, clientY) {
@@ -186,12 +182,10 @@ function swipeEnable() {
     var horizontalDistance = Math.abs(lastX - startX);
     var verticalDistance = Math.abs(lastY - startY);
 
-    if (gestureIntent === "pending" && Math.max(horizontalDistance, verticalDistance) >= 10) {
-      if (horizontalDistance >= verticalDistance * 0.8) {
-        gestureIntent = "horizontal";
-      } else if (verticalDistance > horizontalDistance * 1.2) {
-        gestureIntent = "vertical";
-      }
+    if (gestureIntent === "pending" && Math.max(horizontalDistance, verticalDistance) >= 12) {
+      gestureIntent = horizontalDistance > verticalDistance
+        ? "horizontal"
+        : "vertical";
     }
   }
 
@@ -199,16 +193,17 @@ function swipeEnable() {
     lastX = clientX;
     lastY = clientY;
 
-    var direction = gestureIntent === "vertical"
-      ? 0
-      : getSwipeDirection(lastX - startX, lastY - startY);
-    var originalScrollY = startScrollY;
+    var nativeScrollMoved = Math.abs(window.scrollY - startScrollY) > 2;
+    var direction = gestureIntent === "horizontal" && !nativeScrollMoved
+      ? getSwipeDirection(lastX - startX, lastY - startY)
+      : 0;
 
     resetSwipe();
 
     if (direction !== 0) {
-      window.scrollTo(0, originalScrollY);
-      navigateBySwipe(direction);
+      window.setTimeout(function() {
+        navigateBySwipe(direction);
+      }, 0);
     }
   }
 
@@ -235,7 +230,7 @@ function getSwipeDirection(deltaX, deltaY) {
 
   if (
     horizontalDistance < 32 ||
-    horizontalDistance < verticalDistance * 0.8
+    horizontalDistance <= verticalDistance
   ) {
     return 0;
   }
