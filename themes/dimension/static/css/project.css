@@ -231,6 +231,36 @@ body {
   width: 13.5rem;
 }
 
+.type-pages .experiences .experience-pair {
+  align-items: start;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(2, minmax(0, 20rem));
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 46rem;
+}
+
+.type-pages .experiences .experience-pair a,
+.type-pages .experiences .experience-pair .job,
+.type-pages .experiences .projects-grid a,
+.type-pages .experiences .projects-grid .project {
+  height: 100%;
+}
+
+.type-pages .experiences .projects {
+  margin-top: 4rem;
+}
+
+.type-pages .experiences .projects-grid {
+  align-items: start;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 68rem;
+}
+
 #wrapper.type-home {
   min-height: 100vh;
 }
@@ -299,6 +329,22 @@ body {
   .type-pages .experiences .logo-pair img {
     height: 4.7rem;
     width: 4.7rem;
+  }
+
+  .type-pages .experiences .experience-pair {
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .type-pages .experiences .projects-grid {
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .type-pages .experiences .projects-grid > a:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 0.625rem);
   }
 
   .type-home #footer {
