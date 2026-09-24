@@ -67,22 +67,6 @@ body {
   position: relative;
 }
 
-.type-pages .profile .focus-section::before {
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(61, 153, 112, 0.28),
-    transparent
-  );
-  content: "";
-  height: 1px;
-  left: 50%;
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  width: min(20rem, 68%);
-}
-
 .type-pages .profile .focus-title {
   color: #3d9970;
   font-size: 2.25rem;
