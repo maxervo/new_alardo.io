@@ -46,6 +46,10 @@ body {
   width: 1px;
 }
 
+.type-pages h1 {
+  color: #3d9970;
+}
+
 .type-pages .profile .intro p {
   margin-left: auto;
   margin-right: auto;
@@ -80,7 +84,7 @@ body {
 }
 
 .type-pages .profile .focus-title {
-  color: rgb(61, 153, 112);
+  color: #3d9970;
   font-size: 2.25rem;
   font-weight: 600;
   letter-spacing: normal;
