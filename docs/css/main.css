@@ -1192,6 +1192,9 @@ button {
   justify-content: space-between;
 }
 
+/*
+Page position pill styles retained for possible future reuse.
+
 .sitemap {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.4);
@@ -1215,6 +1218,7 @@ button {
 .type-home .sitemap .fa-square {
   color: rgba(255,255,255,1);
 }
+*/
 
 .type-pages {
   background: white;
@@ -1268,6 +1272,7 @@ button {
   flex: 0 0 40%;
 }
 
+/*
 .type-pages .sitemap .fa-square-o {
   color: rgba(61,153,112,0.4);
 }
@@ -1282,6 +1287,7 @@ button {
   background-image: -ms-radial-gradient(rgba(0, 0, 0, 0.25) 10%, transparent 55%);
   background-image: radial-gradient(rgba(0, 0, 0, 0.25) 10%, transparent 55%);
 }
+*/
 
 .dock .links {
   background-image: -moz-radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);

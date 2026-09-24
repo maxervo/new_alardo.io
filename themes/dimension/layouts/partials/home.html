@@ -1,19 +1,16 @@
 <!-- Header -->
-  <header id="header" v-if="showHome()">
-    <router-link :to="'/about'">
+  <header id="header">
+    <a href="#about">
       <div class="content">
         <div class="inner">
           <h1>{{ .Site.Params.title | safeHTML }}</h1>
           <p>{{ .Site.Params.description | safeHTML }}</p>
         </div>
       </div>
-  </router-link>
+    </a>
   </header>
 
-  <router-view></router-view>
-
-
-  <footer id="footer" v-if="showHome()">
+  <footer id="footer">
 
     <div class="dock">
       <!--

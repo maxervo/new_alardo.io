@@ -10,55 +10,40 @@ body {
   padding: 0 1.5rem;
 }
 
-#wrapper.type-pages {
+.page-content {
+  align-items: center;
+  display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  overflow-x: clip;
+  min-height: 100vh;
+  overflow: clip;
+  padding: 4rem 2rem;
+  position: relative;
   touch-action: pan-y pinch-zoom;
+  width: 100%;
+  z-index: 3;
+}
+
+.scroll-section {
+  width: 100%;
+}
+
+.scroll-section + .scroll-section {
+  padding-top: 4rem;
+}
+
+.type-pages .picture {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #wrapper.type-home {
   touch-action: pan-y pinch-zoom;
 }
 
-#wrapper.type-pages.page-edge-fade {
-  background: transparent;
-}
-
-#wrapper.type-pages.page-edge-fade::before {
-  background: #fff;
-  border-radius: 2rem;
-  bottom: -3rem;
-  content: "";
-  filter: blur(30px);
-  left: 6.5%;
-  pointer-events: none;
-  position: absolute;
-  right: 6.5%;
-  top: -3rem;
-  z-index: 0;
-}
-
-#wrapper.type-pages.page-edge-fade::after {
-  background:
-    radial-gradient(ellipse 8% 14% at 8% 12%, rgba(255, 255, 255, 0.74), transparent 82%),
-    radial-gradient(ellipse 7% 18% at 7% 35%, rgba(255, 255, 255, 0.62), transparent 84%),
-    radial-gradient(ellipse 10% 16% at 9% 59%, rgba(255, 255, 255, 0.7), transparent 82%),
-    radial-gradient(ellipse 8% 18% at 7% 84%, rgba(255, 255, 255, 0.64), transparent 84%),
-    radial-gradient(ellipse 8% 16% at 92% 16%, rgba(255, 255, 255, 0.7), transparent 82%),
-    radial-gradient(ellipse 10% 19% at 93% 41%, rgba(255, 255, 255, 0.64), transparent 84%),
-    radial-gradient(ellipse 7% 16% at 91% 65%, rgba(255, 255, 255, 0.74), transparent 82%),
-    radial-gradient(ellipse 9% 18% at 93% 88%, rgba(255, 255, 255, 0.64), transparent 84%);
-  content: "";
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-
-#wrapper.type-pages.page-edge-fade > * {
-  position: relative;
-  z-index: 1;
+.hero-top-spacer {
+  flex: 0 0 4.96rem;
+  width: 1px;
 }
 
 .type-pages .profile .intro p {
@@ -285,23 +270,6 @@ body {
   .type-pages .profile .focus-title {
     font-size: 1.75rem;
     line-height: 1.4;
-  }
-
-  #wrapper.type-pages.page-edge-fade::before {
-    border-radius: 1rem;
-    bottom: -1.5rem;
-    filter: blur(12px);
-    left: 3%;
-    right: 3%;
-    top: -1.5rem;
-  }
-
-  #wrapper.type-pages.page-edge-fade::after {
-    background:
-      radial-gradient(ellipse 8% 20% at 4% 18%, rgba(255, 255, 255, 0.8), transparent 80%),
-      radial-gradient(ellipse 9% 23% at 5% 62%, rgba(255, 255, 255, 0.76), transparent 80%),
-      radial-gradient(ellipse 8% 20% at 96% 25%, rgba(255, 255, 255, 0.8), transparent 80%),
-      radial-gradient(ellipse 9% 23% at 95% 73%, rgba(255, 255, 255, 0.76), transparent 80%);
   }
 
   .type-pages .profile .intro {

@@ -10,7 +10,6 @@ publishDir = "docs"
 [params]
   title = "Maxime Alardo"
   description = 'Windsurfer | R&D'
-  pageEdgeFade = true
   logo = "fa-diamond"
   copyright = "Untitled"
 

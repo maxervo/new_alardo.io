@@ -7,7 +7,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/css/main.css" />
-		<link rel="stylesheet" href="/css/project.css?v=10" />
+		<link rel="stylesheet" href="/css/project.css?v=11" />
 		<link rel="stylesheet" href="/css/bulma.custom.css" />
 		<link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
 		<link rel=icon href=/images/favicon.png>
@@ -23,32 +23,23 @@
 
     <div id="app">
 
-        <div id="wrapper" class="page-edge-fade" :class="getType()">
+        <div id="wrapper" class="type-home">
 
-          <nav id="site" class="sitemap" >
-            <div :class="['dots', getBox()]">
-              <router-link :to="'/'"><i :class="[getCursorShape(0), 'dot-0']" @mouseover="hoverCursor(0)" @mouseleave="leaveCursor()"></i></router-link>
-              <router-link :to="'/about'"><i :class="[getCursorShape(1), 'dot-1']" @mouseover="hoverCursor(1)" @mouseleave="leaveCursor()"></i></router-link>
-              <router-link :to="'/experiences'"><i :class="[getCursorShape(2), 'dot-2']" @mouseover="hoverCursor(2)" @mouseleave="leaveCursor()"></i></router-link>
-            </div>
-          </nav>
+          <div class="hero-top-spacer" aria-hidden="true"></div>
 
           
-  <header id="header" v-if="showHome()">
-    <router-link :to="'/about'">
+  <header id="header">
+    <a href="#about">
       <div class="content">
         <div class="inner">
           <h1>Maxime Alardo</h1>
           <p>Windsurfer | R&D</p>
         </div>
       </div>
-  </router-link>
+    </a>
   </header>
 
-  <router-view></router-view>
-
-
-  <footer id="footer" v-if="showHome()">
+  <footer id="footer">
 
     <div class="dock">
       
@@ -80,10 +71,13 @@
 
   </footer>
 
+        </div>
 
-          <div class="picture" v-if="showAbout()"></div>
+        <main class="page-content type-pages">
+          <section id="about" class="scroll-section">
+            <div class="picture"></div>
 
-<div class="profile" v-if="showAbout()">
+<div class="profile">
     <h1>Maxime Alardo</h1>
 
     <div class="intro">
@@ -210,8 +204,10 @@
     </div>
 </div>
 
+          </section>
 
-          <div class="experiences" v-if="showExperiences()">
+          <section id="experiences" class="scroll-section">
+            <div class="experiences">
 
   <div class="work">
     <h1>Work Experience</h1>
@@ -274,7 +270,8 @@
 
 </div>
 
-        </div>
+          </section>
+        </main>
 
         
         <div id="bg"></div>
@@ -282,12 +279,9 @@
     </div>
 
     
-      <script src="/js/vue.dev.js"></script> 
-      <script src="/js/vue-router.js"></script>
       <script src="/js/skel.min.js"></script>
       <script src="/js/util.js"></script>
       <script src="/js/main.js"></script>
-			<script src="/js/app.js?v=14"></script>
 
     </body>
   </html>
